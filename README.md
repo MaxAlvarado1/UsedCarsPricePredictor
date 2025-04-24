@@ -130,23 +130,23 @@ Saved the final model pipeline using **Joblib**:
 
 ---
 
-## 📚 Libraries Used
-import os 
-import kaggle
-import pandas as pd 
-import numpy as np
-%matplotlib inline
-import matplotlib.pyplot as plt
-from zlib import crc32
-from pandas.plotting import scatter_matrix
-from sklearn.impute import SimpleImputer 
-from sklearn.preprocessing import OrdinalEncoder 
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.compose import ColumnTransformer
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import RandomizedSearchCV
-from scipy import stats
+## Libraries Used
+- import os 
+- import kaggle
+- import pandas as pd 
+- import numpy as np
+- %matplotlib inline
+- import matplotlib.pyplot as plt
+- from zlib import crc32
+- from pandas.plotting import scatter_matrix
+- from sklearn.impute import SimpleImputer 
+- from sklearn.preprocessing import OrdinalEncoder 
+- from sklearn.preprocessing import OneHotEncoder
+- from sklearn.pipeline import Pipeline
+- from sklearn.preprocessing import StandardScaler
+- from sklearn.compose import ColumnTransformer
+- from sklearn.linear_model import LinearRegression
+- from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error
+- from sklearn.model_selection import cross_val_score
+- from sklearn.model_selection import RandomizedSearchCV
+- from scipy import stats
