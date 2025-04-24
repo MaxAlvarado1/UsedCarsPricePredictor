@@ -3,13 +3,15 @@
 ## 📌 Project Overview
 This project demonstrates a full end-to-end **data science pipeline** to predict the price of used cars in the US market. Using **Python** and powerful tools like **Pandas**, **NumPy**, **Matplotlib**, **Seaborn**, and **Scikit-Learn**, I cleaned, explored, and modeled real-world data to produce accurate price predictions.
 
-It showcases hands-on experience with **machine learning**, **feature engineering**, **hyperparameter tuning**, and **model evaluation**, making it an ideal demonstration for **data science job applications**.
+---
+
+📌 _For full list of libraries, see [📚 Libraries Used](#libraries-used)_
 
 ---
 
 ## 📦 Dataset
 - **Source**: [US Used Cars Dataset from Kaggle](https://www.kaggle.com/datasets/ananaymital/us-used-cars-dataset/data)
-- The dataset contains listings for used cars including fields like make, model, year, mileage, condition, and price.
+- The dataset contains listings for used cars including fields like make, model, year, mileage, and price.
 - I filtered the dataset to only include **common US car brands** and removed extreme outliers to ensure data quality.
 
 ---
@@ -33,7 +35,7 @@ To ensure **reproducibility** and prevent **data leakage**, I used a **hash-base
 ---
 
 ## 📊 Data Exploration & Visualization
-Used **Seaborn** and **Matplotlib** for **exploratory data analysis (EDA)**:
+Used **Matplotlib** for **exploratory data analysis (EDA)**:
 - Investigated feature distributions and relationships
 - Analyzed correlations between features and target (`price`)
 - Visualized skewness and feature importance drivers
@@ -103,21 +105,12 @@ Saved the final model pipeline using **Joblib**:
 
 ---
 
-## 🧠 Key Takeaways
+## 🧠 Key Results
 
-- Demonstrated ability to clean, preprocess, and engineer real-world data
-- Built **machine learning models** with **Scikit-Learn**
-- Applied **cross-validation** and **hyperparameter tuning**
-- Emphasized **interpretability** through feature importance
-- Practiced full **data science lifecycle**, from raw data to deployable model
-
----
-
-## 🚀 Future Enhancements
-
-- Deploy as a **web app** using **Streamlit** for interactive price prediction
-- Expand with external sources (e.g., car condition scores, location data)
-- Explore **deep learning** or **ensemble stacking** methods for improved performance
+- The **Random Forest Regressor**, before tuning, achieved strong performance with a **lower cross-validation RMSE** compared to the Decision Tree model, showing better generalization to unseen data.
+- The **Decision Tree** showed signs of **overfitting**, performing well on training data but poorly on validation.
+- The final model achieved a stable and realistic **RMSE** on the test set, with performance validated through a 95% confidence interval.
+- Feature importance analysis revealed that **year**, **horsepower**, and **mileage** were the most influential features in predicting price.
 
 ---
 
@@ -134,3 +127,26 @@ Saved the final model pipeline using **Joblib**:
 - **Scikit-Learn**
 - **Joblib**
 - **Jupyter Notebook**
+
+---
+
+## 📚 Libraries Used
+import os 
+import kaggle
+import pandas as pd 
+import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as plt
+from zlib import crc32
+from pandas.plotting import scatter_matrix
+from sklearn.impute import SimpleImputer 
+from sklearn.preprocessing import OrdinalEncoder 
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import RandomizedSearchCV
+from scipy import stats
