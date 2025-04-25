@@ -6,7 +6,7 @@ import pandas as pd
 import datetime
 import gdown
 
-@st.cache_resource
+#@st.cache_resource
 def load_model():
     url = 'https://drive.google.com/uc?export=download&id=1lKsEzOg0-ylx9qCaJ1_vLx9scV7bHkae'
     output = 'UC_Price_Predictor.pkl'
