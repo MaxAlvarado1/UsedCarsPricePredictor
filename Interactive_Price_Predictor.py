@@ -6,10 +6,10 @@ import pandas as pd
 import datetime
 import gdown
 
-#@st.cache_resource
+@st.cache_resource
 def load_model():
-    url = 'https://drive.google.com/uc?export=download&id=1lKsEzOg0-ylx9qCaJ1_vLx9scV7bHkae'
-    output = 'UC_Price_Predictor.pkl'
+    url = 'https://drive.google.com/uc?export=download&id=1hM4TSC2wFiphs_8dAMLf3ZYvSoct633z'
+    output = 'model.pkl'
 
     try:
         st.write("📦 Downloading model...")
@@ -23,12 +23,11 @@ def load_model():
         st.text(traceback.format_exc())
         raise e 
 
-UC_Price_Predictor = load_model()
+UCPP_model = load_model()
 
-full_pipeline = UC_Price_Predictor["full_pipeline"]
-column_summary = UC_Price_Predictor["column_summary"]
-UCPP_model = UC_Price_Predictor["model"]
-data_sample = UC_Price_Predictor["data_sample"]
+full_pipeline = joblib.load('pipeline.pkl')
+column_summary = joblib.load('summary.pkl')
+data_sample = joblib.load('sample.pkl')
 
 def user_input_features(column_summary):
     user_inputs = {} 
