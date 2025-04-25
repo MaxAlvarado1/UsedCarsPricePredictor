@@ -10,15 +10,20 @@ import gdown
 def load_model():
     url = 'https://drive.google.com/uc?export=download&id=1lKsEzOg0-ylx9qCaJ1_vLx9scV7bHkae'
     output = 'UC_Price_Predictor.pkl'
-    gdown.download(url, output, quiet=False)
-    return joblib.load(output)
 
-try:
-    UC_Price_Predictor = load_model()
-    print("✅ Model loaded successfully")
-except Exception as e:
-    print("❌ Failed to load model:")
-    traceback.print_exc()
+    try:
+        st.write("📦 Downloading model...")
+        gdown.download(url, output, quiet=False)
+        st.write("📥 Download complete, loading model...")
+        model = joblib.load(output)
+        st.success("✅ Model loaded successfully")
+        return model
+    except Exception as e:
+        st.error("❌ Error loading model!")
+        st.text(traceback.format_exc())
+        raise e 
+
+UC_Price_Predictor = load_model()
 
 full_pipeline = UC_Price_Predictor["full_pipeline"]
 column_summary = UC_Price_Predictor["column_summary"]
