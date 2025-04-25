@@ -52,6 +52,10 @@ def user_input_features(column_summary):
 
     return user_inputs
 
+st.write("# Used Car Price Predictor")
+
+st.sidebar.header("Customize the Parameters")
+st.sidebar.markdown("Adjust the settings below, then click **Predict** at the bottom to see the estimated price.")
 
 user_inputs = user_input_features(column_summary)
 
@@ -69,8 +73,18 @@ if st.sidebar.button("Predict"):
     user_inputs_show = pd.DataFrame(user_inputs.items(), columns=["Parameter", "Value"])
     st.table(user_inputs_show)
 
-user_inputs_df_prepared = full_pipeline.transform(user_inputs_df)
+st.write("")
 
-user_inputs_predictions = UCPP_model.predict(user_inputs_df_prepared)
+st.write("""  
+Please visit my github repository to see how this Machine Learning Model was created!
 
-st.write("# Predicted Price: ", user_inputs_predictions[0])
+My model uses 23 parameters to predict the price of a used car. Use the left sidebar to input your own parameters to see what my model will predict!
+         
+The options for the parameters are from my original dataset, but there is no constraints on what combination you choose. So feel free to be unrealistic and have it predict the price for a "2010 Ford Corvette"!
+
+Showing all the data that was used in training my model will be too much to show here, so here is a small sample:
+""")
+
+st.write("## Sample Data")
+
+st.write(data_sample)
