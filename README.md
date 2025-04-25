@@ -116,7 +116,7 @@ Saved the final model pipeline using **Joblib**:
 
 ## 📓 Full Project Notebook
 
-👉 [Click here to view the full Jupyter Notebook](notebooks/Used_Car_Price_Predictor.ipynb)
+👉 [Click here to view the full Jupyter Notebook](Used_Car_Price_Predictor.ipynb)
 
 ---
 
