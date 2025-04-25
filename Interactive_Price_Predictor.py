@@ -4,30 +4,43 @@ import joblib
 import traceback
 import pandas as pd
 import datetime
-import gdown
+import os
 
-#@st.cache_resource
 def load_model():
     url = 'https://drive.google.com/uc?export=download&id=1hM4TSC2wFiphs_8dAMLf3ZYvSoct633z'
     output = 'model.pkl'
 
+    st.write("📦 Downloading model...")
+    gdown.download(url, output, quiet=False)
+    
+    # Check if file exists after download
+    if os.path.exists(output):
+        st.write(f"📥 Download complete, file size: {os.path.getsize(output)} bytes")
+    else:
+        st.error("❌ Model download failed!")
+        return None
+
     try:
-        st.write("📦 Downloading model...")
-        gdown.download(url, output, quiet=False)
-        st.write("📥 Download complete, loading model...")
-        model = joblib.load(output)
+        st.write("📥 Loading model...")
+        model = joblib.load(output) 
         st.success("✅ Model loaded successfully")
         return model
     except Exception as e:
-        st.error("❌ Error loading model!")
+        st.error(f"❌ Error loading model: {e}")
         st.text(traceback.format_exc())
-        raise e 
+        return None
 
 UCPP_model = load_model()
+
+if UCPP_model is None:
+    st.stop()  # Stop the app if model is not loaded
+
+# Continue with the rest of your logic...
 
 full_pipeline = joblib.load('pipeline.pkl')
 column_summary = joblib.load('summary.pkl')
 data_sample = joblib.load('sample.pkl')
+
 
 def user_input_features(column_summary):
     user_inputs = {} 
