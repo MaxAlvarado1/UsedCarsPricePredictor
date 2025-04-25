@@ -99,12 +99,12 @@ if st.sidebar.button("Predict"):
 
 st.write("")
 
-st.write("""  
-Please visit my github repository to see how this Machine Learning Model was created!
+st.markdown("""  
+Please visit my [GitHub repository](https://github.com/MaxAlvarado1/UsedCarsPricePredictor) to see how this Machine Learning Model was created!
 
 My model uses 23 parameters to predict the price of a used car. Use the left sidebar to input your own parameters to see what my model will predict!
          
-The options for the parameters are from my original dataset, but there is no constraints on what combination you choose. So feel free to be unrealistic and have it predict the price for a "2010 Ford Corvette"!
+The options for the parameters are from my original dataset, but there is no constraint on what combination you choose. So feel free to be unrealistic and have it predict the price for a "2010 Ford Corvette"!
 
 Showing all the data that was used in training my model will be too much to show here, so here is a small sample:
 """)

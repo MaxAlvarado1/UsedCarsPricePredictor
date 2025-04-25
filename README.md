@@ -82,7 +82,7 @@ Used **RandomizedSearchCV** to tune the **Random Forest**:
 - Visualized and ranked **feature importances** based on model output
 
 <p align="center">
-  <img src="images/feature_importance.png" width="500"/>
+  <img src="Images/Feature_Importance.png" width="500"/>
 </p>
 
 ---
@@ -117,6 +117,12 @@ Saved the final model pipeline using **Joblib**:
 ## 📓 Full Project Notebook
 
 👉 [Click here to view the full Jupyter Notebook](Used_Cars_Price_Predictor.ipynb)
+
+---
+
+## 🧑‍💻 Interactive Streamlit App
+
+👉 [Click here to interact and predict with my model using Streamlit](https://usedcarspricepredictor.streamlit.app/)
 
 ---
 
