@@ -30,13 +30,6 @@ def load_model():
         st.text(traceback.format_exc())
         return None
 
-UCPP_model = load_model()
-
-if UCPP_model is None:
-    st.stop()  # Stop the app if model is not loaded
-
-# Continue with the rest of your logic...
-
 full_pipeline = joblib.load('pipeline.pkl')
 column_summary = joblib.load('summary.pkl')
 data_sample = joblib.load('sample.pkl')
@@ -84,6 +77,9 @@ st.sidebar.markdown("Adjust the settings below, then click **Predict** at the bo
 user_inputs = user_input_features(column_summary)
 
 if st.sidebar.button("Predict"):
+    UCPP_model = load_model()
+    if UCPP_model is None:
+        st.stop()
     user_inputs_df = pd.DataFrame([user_inputs])
 
     user_inputs_df_prepared = full_pipeline.transform(user_inputs_df)
