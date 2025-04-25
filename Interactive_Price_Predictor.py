@@ -2,34 +2,21 @@ import streamlit as st
 import joblib 
 import pandas as pd
 import datetime
+import gdown
 
+@st.cache_resource
+def load_model():
+    url = 'https://drive.google.com/uc?export=download&id=1lKsEzOg0-ylx9qCaJ1_vLx9scV7bHkae'
+    output = 'UC_Price_Predictor.pkl'
+    gdown.download(url, output, quiet=False)
+    return joblib.load(output)
 
-UC_Price_Predictor = joblib.load("UC_Price_Predictor.pkl")
+UC_Price_Predictor = load_model()
 
 full_pipeline = UC_Price_Predictor["full_pipeline"]
 column_summary = UC_Price_Predictor["column_summary"]
 UCPP_model = UC_Price_Predictor["model"]
 data_sample = UC_Price_Predictor["data_sample"]
-
-
-st.write("""# Used Car Price Predictor
-
-Please visit my github repository to see how this Machine Learning Model was created!
-
-My model uses 23 parameters to predict the price of a used car. Use the left sidebar to input your own parameters to see what my model will predict!
-         
-The options for the parameters are from my original dataset, but there is no constraints on what combination you choose. So feel free to be unrealistic and have it predict the price for a "2010 Ford Corvette"!
-
-Showing all the data that was used in training my model will be too much to show here, so here is a small sample:
-""")
-
-
-st.write("## Sample Data")
-
-st.write(data_sample)
-
-
-st.sidebar.header("Input Your Own Parameters!")
 
 def user_input_features(column_summary):
     user_inputs = {} 
@@ -65,27 +52,39 @@ def user_input_features(column_summary):
 
     return user_inputs
 
+st.write("# Used Car Price Predictor")
+
+st.sidebar.header("Customize the Parameters")
+st.sidebar.markdown("Adjust the settings below, then click **Predict** at the bottom to see the estimated price.")
 
 user_inputs = user_input_features(column_summary)
 
-user_inputs_df = pd.DataFrame([user_inputs])
+if st.sidebar.button("Predict"):
+    user_inputs_df = pd.DataFrame([user_inputs])
 
-st.write("## Here is what you inputed:")
-user_inputs_show = pd.DataFrame(user_inputs.items(), columns=["Parameter", "Value"])
+    user_inputs_df_prepared = full_pipeline.transform(user_inputs_df)
+    user_inputs_predictions = UCPP_model.predict(user_inputs_df_prepared)
 
-st.table(user_inputs_show)
+    predicted_price = user_inputs_predictions[0]
+    formatted_price = f"${predicted_price:,.0f}"
+    st.markdown(f"# Predicted Price: <span style='color:green'>{formatted_price}</span>", unsafe_allow_html=True)
 
-user_inputs_df_prepared = full_pipeline.transform(user_inputs_df)
+    st.write("## Here is what you inputed:")
+    user_inputs_show = pd.DataFrame(user_inputs.items(), columns=["Parameter", "Value"])
+    st.table(user_inputs_show)
 
-user_inputs_predictions = UCPP_model.predict(user_inputs_df_prepared)
+st.write("")
 
-st.write("# Predicted Price: ", user_inputs_predictions[0])
+st.write("""  
+Please visit my github repository to see how this Machine Learning Model was created!
 
+My model uses 23 parameters to predict the price of a used car. Use the left sidebar to input your own parameters to see what my model will predict!
+         
+The options for the parameters are from my original dataset, but there is no constraints on what combination you choose. So feel free to be unrealistic and have it predict the price for a "2010 Ford Corvette"!
 
+Showing all the data that was used in training my model will be too much to show here, so here is a small sample:
+""")
 
-# st.write("## Parameters Used To Predict Price")
+st.write("## Sample Data")
 
-# df_columns = pd.DataFrame({"Columns": list(column_summary.keys())})
-
-# Display the table in Streamlit
-# st.table(df_columns)
+st.write(data_sample)

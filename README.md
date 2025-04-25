@@ -116,7 +116,7 @@ Saved the final model pipeline using **Joblib**:
 
 ## 📓 Full Project Notebook
 
-👉 [Click here to view the full Jupyter Notebook](notebooks/Used_Car_Price_Predictor.ipynb)
+👉 [Click here to view the full Jupyter Notebook](Used_Cars_Price_Predictor.ipynb)
 
 ---
 
@@ -150,3 +150,4 @@ Saved the final model pipeline using **Joblib**:
 - from sklearn.model_selection import cross_val_score
 - from sklearn.model_selection import RandomizedSearchCV
 - from scipy import stats
+- import joblib
