@@ -1,5 +1,7 @@
 import streamlit as st
+import gdown
 import joblib 
+import traceback
 import pandas as pd
 import datetime
 import gdown
@@ -11,7 +13,12 @@ def load_model():
     gdown.download(url, output, quiet=False)
     return joblib.load(output)
 
-UC_Price_Predictor = load_model()
+try:
+    UC_Price_Predictor = load_model()
+    print("✅ Model loaded successfully")
+except Exception as e:
+    print("❌ Failed to load model:")
+    traceback.print_exc()
 
 full_pipeline = UC_Price_Predictor["full_pipeline"]
 column_summary = UC_Price_Predictor["column_summary"]
