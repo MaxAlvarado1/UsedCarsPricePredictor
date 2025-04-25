@@ -77,7 +77,10 @@ if st.sidebar.button("Predict"):
     st.markdown(f"# Predicted Price: <span style='color:green'>{formatted_price}</span>", unsafe_allow_html=True)
 
     st.write("## Here is what you inputed:")
-    user_inputs_show = pd.DataFrame(user_inputs.items(), columns=["Parameter", "Value"])
+    user_inputs_show = pd.DataFrame(
+        [(k, str(v)) for k, v in user_inputs.items()],
+        columns=["Parameter", "Value"]
+    )
     st.table(user_inputs_show)
 
 st.write("")
